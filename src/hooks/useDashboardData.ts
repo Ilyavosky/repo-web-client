@@ -26,7 +26,7 @@ export function useDashboardData(): UseDashboardDataResult {
   const fetchStats = useCallback(async (periodo: string = '30dias') => {
     setStatsLoading(true);
     try {
-      let url = '/api/dashboard/stats';
+      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/dashboard/stats`;
       if (periodo !== 'historico') {
         const hoy = new Date();
         const inicio = new Date();
