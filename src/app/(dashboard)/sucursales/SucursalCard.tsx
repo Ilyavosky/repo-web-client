@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './SucursalCard.module.css';
-import {InventarioItem} from '@/modules/inventario/types/inventario.types'
+import {InventarioItem} from '@/types/inventario.types'
 
 interface SucursalCardProps {
   id_sucursal: number;

@@ -1,6 +1,6 @@
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { ValueType, NameType, Payload } from 'recharts/types/component/DefaultTooltipContent';
-import { VentasPorDia } from '@/modules/dashboard/types/dashboard.types';
+import { VentasPorDia } from '@/types/dashboard.types';
 
 interface SalesTrendChartProps {
   data: VentasPorDia[];

@@ -10,7 +10,7 @@ import InfoVarianteModal from '../inventario/InfoVarianteModal';
 import AjusteStockModal from '../inventario/AjusteStockModal';
 import CreateSucursalModal from './CreateSucursal';
 import type { Sucursal, SucursalConInventario, VarianteProducto, Producto } from '@/types/sucursales-view.types';
-import type { InventarioItem } from '@/modules/inventario/types/inventario.types';
+import type { InventarioItem } from '@/types/inventario.types';
 import styles from './page.module.css';
 
 export default function SucursalesPage() {

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import styles from './SucursalDetail.module.css';
-import { InventarioItem } from '@/modules/inventario/types/inventario.types';
+import { InventarioItem } from '@/types/inventario.types';
 
 interface SucursalDetailProps {
   nombre: string;

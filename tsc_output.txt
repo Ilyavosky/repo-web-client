@@ -1,14 +1,14 @@
-src/app/(dashboard)/dashboard/BestSellersCard.tsx(2,33): error TS2307: Cannot find module '@/modules/dashboard/types/dashboard.types' or its corresponding type declarations.
-src/app/(dashboard)/dashboard/SalesTrendChart.tsx(3,30): error TS2307: Cannot find module '@/modules/dashboard/types/dashboard.types' or its corresponding type declarations.
-src/app/(dashboard)/dashboard/SlowMoversCard.tsx(2,33): error TS2307: Cannot find module '@/modules/dashboard/types/dashboard.types' or its corresponding type declarations.
-src/app/(dashboard)/dashboard/SucursalesPerformance.tsx(2,39): error TS2307: Cannot find module '@/modules/dashboard/types/dashboard.types' or its corresponding type declarations.
-src/app/(dashboard)/inventario/InfoVarianteModal.tsx(4,30): error TS2307: Cannot find module '@/modules/productos/types/variantes.types' or its corresponding type declarations.
-src/app/(dashboard)/inventario/SelectVarianteModal.tsx(7,43): error TS2307: Cannot find module '@/modules/productos/types/productos.types' or its corresponding type declarations.
+src/app/(dashboard)/dashboard/BestSellersCard.tsx(2,33): error TS2307: Cannot find module '@/types/dashboard/types/dashboard.types' or its corresponding type declarations.
+src/app/(dashboard)/dashboard/SalesTrendChart.tsx(3,30): error TS2307: Cannot find module '@/types/dashboard/types/dashboard.types' or its corresponding type declarations.
+src/app/(dashboard)/dashboard/SlowMoversCard.tsx(2,33): error TS2307: Cannot find module '@/types/dashboard/types/dashboard.types' or its corresponding type declarations.
+src/app/(dashboard)/dashboard/SucursalesPerformance.tsx(2,39): error TS2307: Cannot find module '@/types/dashboard/types/dashboard.types' or its corresponding type declarations.
+src/app/(dashboard)/inventario/InfoVarianteModal.tsx(4,30): error TS2307: Cannot find module '@/types/productos/types/variantes.types' or its corresponding type declarations.
+src/app/(dashboard)/inventario/SelectVarianteModal.tsx(7,43): error TS2307: Cannot find module '@/types/productos/types/productos.types' or its corresponding type declarations.
 src/app/(dashboard)/inventario/SelectVarianteModal.tsx(54,34): error TS7006: Parameter 'v' implicitly has an 'any' type.
-src/app/(dashboard)/sucursales/page.tsx(13,37): error TS2307: Cannot find module '@/modules/inventario/types/inventario.types' or its corresponding type declarations.
-src/app/(dashboard)/sucursales/SucursalCard.tsx(4,30): error TS2307: Cannot find module '@/modules/inventario/types/inventario.types' or its corresponding type declarations.
-src/app/(dashboard)/sucursales/SucursalDetail.tsx(3,32): error TS2307: Cannot find module '@/modules/inventario/types/inventario.types' or its corresponding type declarations.
-src/hooks/useDashboardData.ts(3,30): error TS2307: Cannot find module '@/modules/inventario/types/inventario.types' or its corresponding type declarations.
-src/types/dashboard-view.types.ts(1,37): error TS2307: Cannot find module '@/modules/inventario/types/inventario.types' or its corresponding type declarations.
-src/types/dashboard-view.types.ts(2,92): error TS2307: Cannot find module '@/modules/dashboard/types/dashboard.types' or its corresponding type declarations.
-src/types/sucursales-view.types.ts(1,37): error TS2307: Cannot find module '@/modules/inventario/types/inventario.types' or its corresponding type declarations.
+src/app/(dashboard)/sucursales/page.tsx(13,37): error TS2307: Cannot find module '@/types/inventario/types/inventario.types' or its corresponding type declarations.
+src/app/(dashboard)/sucursales/SucursalCard.tsx(4,30): error TS2307: Cannot find module '@/types/inventario/types/inventario.types' or its corresponding type declarations.
+src/app/(dashboard)/sucursales/SucursalDetail.tsx(3,32): error TS2307: Cannot find module '@/types/inventario/types/inventario.types' or its corresponding type declarations.
+src/hooks/useDashboardData.ts(3,30): error TS2307: Cannot find module '@/types/inventario/types/inventario.types' or its corresponding type declarations.
+src/types/dashboard-view.types.ts(1,37): error TS2307: Cannot find module '@/types/inventario/types/inventario.types' or its corresponding type declarations.
+src/types/dashboard-view.types.ts(2,92): error TS2307: Cannot find module '@/types/dashboard/types/dashboard.types' or its corresponding type declarations.
+src/types/sucursales-view.types.ts(1,37): error TS2307: Cannot find module '@/types/inventario/types/inventario.types' or its corresponding type declarations.

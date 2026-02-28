@@ -1,7 +1,7 @@
 import Dialog from '@/components/ui/Dialog';
 import styles from './Infoproducto.module.css';
 import formStyles from './form.module.css';
-import { VarianteInfo } from '@/modules/productos/types/variantes.types';
+import { VarianteInfo } from '@/types/variantes.types';
 import { useState, useEffect } from 'react';
 
 interface InfoVarianteModalProps {

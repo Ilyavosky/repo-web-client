@@ -1,5 +1,5 @@
-import type { InventarioItem } from '@/modules/inventario/types/inventario.types';
-import type { RankingProducto, ResumenVentasSucursal, UtilidadesNetas, VentasPorDia } from '@/modules/dashboard/types/dashboard.types';
+import type { InventarioItem } from '@/types/inventario.types';
+import type { RankingProducto, ResumenVentasSucursal, UtilidadesNetas, VentasPorDia } from '@/types/dashboard.types';
 
 export interface DashboardStats {
   estadisticas: {

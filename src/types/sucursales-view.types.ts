@@ -1,4 +1,4 @@
-import type { InventarioItem } from '@/modules/inventario/types/inventario.types';
+import type { InventarioItem } from '@/types/inventario.types';
 export interface Sucursal {
   id_sucursal: number;
   nombre_lugar: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResumenVentasSucursal } from '@/modules/dashboard/types/dashboard.types';
+import { ResumenVentasSucursal } from '@/types/dashboard.types';
 import styles from './kpiCards.module.css';
 
 interface SucursalesPerformanceProps {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { RankingProducto } from '@/modules/dashboard/types/dashboard.types';
+import { RankingProducto } from '@/types/dashboard.types';
 import styles from './kpiCards.module.css';
 
 interface SlowMoversCardProps {
