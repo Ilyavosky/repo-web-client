@@ -1,0 +1,37 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+}
+
+.input {
+  width: 100%;
+  padding: 0.65rem 2.5rem 0.65rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  color: #374151;
+  background-color: #f9fafb;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.input:focus {
+  border-color: #850E35;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(133, 14, 53, 0.08);
+}
+
+.icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}

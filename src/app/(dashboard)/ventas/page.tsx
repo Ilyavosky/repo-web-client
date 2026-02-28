@@ -29,7 +29,7 @@ export default function VentasPage() {
   };
 
   useEffect(() => {
-    fetch('/api/inventario/sucursales', { credentials: 'include' })
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales', { credentials: 'include' })
       .then(r => r.ok ? r.json() : { data: [] })
       .then(d => setSucursales(d.data || []))
       .catch(() => setSucursales([]));

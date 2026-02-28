@@ -1,0 +1,73 @@
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  color: #1f2937;
+}
+
+.th {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+  background-color: #ffffff;
+}
+
+.tr {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.15s;
+}
+
+.tr:last-child {
+  border-bottom: none;
+}
+
+.tr:hover {
+  background-color: #fdf2f5;
+}
+
+.td {
+  padding: 0.75rem 1rem;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.empty {
+  padding: 2rem;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s;
+}
+
+.sortable:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.sortIconPlaceholder {
+  opacity: 0.3;
+  font-size: 0.8em;
+  margin-left: 0.3rem;
+}
+
+.sortIconActive {
+  color: #850E35;
+  font-weight: bold;
+  margin-left: 0.3rem;
+}

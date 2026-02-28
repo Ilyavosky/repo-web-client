@@ -28,7 +28,7 @@ export function useProductoEdit(
   const fetchProducto = useCallback(async (id: number) => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/productos/${id}`, { credentials: 'include' });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos/${id}`, { credentials: 'include' });
       if (!res.ok) throw new Error();
       const producto = await res.json();
       const variante = producto.variantes[0] ?? null;
@@ -36,11 +36,11 @@ export function useProductoEdit(
 
       let inventario = null;
       if (variante) {
-        const resSuc = await fetch('/api/inventario/sucursales', { credentials: 'include' });
+        const resSuc = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales', { credentials: 'include' });
         if (resSuc.ok) {
           const { data: sucursales = [] } = await resSuc.json();
           for (const s of sucursales) {
-            const r = await fetch(`/api/inventario?sucursal_id=${s.id_sucursal}`, { credentials: 'include' });
+            const r = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario?sucursal_id=${s.id_sucursal}`, { credentials: 'include' });
             if (!r.ok) continue;
             const { data = [] } = await r.json();
             const found = data.find((item: { id_variante: number }) => item.id_variante === variante.id_variante);

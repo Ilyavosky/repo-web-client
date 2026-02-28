@@ -34,7 +34,7 @@ export default function EditVarianteModal({ open, varianteId, onClose, onSuccess
       if (!open || !varianteId) return;
       setLoading(true);
       try {
-        const res = await fetch(`/api/variantes/${varianteId}`, { credentials: 'include' });
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/variantes/${varianteId}`, { credentials: 'include' });
         if (!res.ok) throw new Error('Error al cargar la variante');
         const json = await res.json();
         
@@ -46,7 +46,7 @@ export default function EditVarianteModal({ open, varianteId, onClose, onSuccess
         // Fetch product to get the name
         let pName = 'Producto Maestro';
         if (v.id_producto_maestro) {
-           const pRes = await fetch(`/api/productos/${v.id_producto_maestro}`, { credentials: 'include' });
+           const pRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos/${v.id_producto_maestro}`, { credentials: 'include' });
            if (pRes.ok) {
                const pData = await pRes.json();
                pName = pData.nombre || pName;
@@ -99,7 +99,7 @@ export default function EditVarianteModal({ open, varianteId, onClose, onSuccess
     setSubmitting(true);
     try {
       const results = await Promise.allSettled([
-        fetch(`/api/variantes/${varianteId}`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/variantes/${varianteId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',

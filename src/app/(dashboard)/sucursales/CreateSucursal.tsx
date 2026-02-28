@@ -38,7 +38,7 @@ export default function CreateSucursalModal({ open, onClose, onSuccess, showToas
 
     setSubmitting(true);
     try {
-      const res = await fetch('/api/sucursales', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/sucursales', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

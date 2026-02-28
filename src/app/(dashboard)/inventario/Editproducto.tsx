@@ -47,7 +47,7 @@ export default function EditProductoModal({
 
     setSubmitting(true);
     try {
-      const result = await fetch(`/api/productos/${productoId}`, {
+      const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos/${productoId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

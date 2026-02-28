@@ -47,7 +47,7 @@ export default function SucursalesPage() {
 
   const fetchInventarioSucursal = useCallback(async (id_sucursal: number): Promise<InventarioItem[]> => {
     try {
-      const res = await fetch(`/api/inventario?sucursal_id=${id_sucursal}`, { credentials: 'include' });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario?sucursal_id=${id_sucursal}`, { credentials: 'include' });
       if (!res.ok) return [];
       const data = await res.json();
       return data.data || [];
@@ -61,8 +61,8 @@ export default function SucursalesPage() {
     setError('');
     try {
       const [resSucursales, resProductos] = await Promise.all([
-        fetch('/api/inventario/sucursales', { credentials: 'include' }),
-        fetch('/api/productos?page=1&limit=100', { credentials: 'include' }),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales', { credentials: 'include' }),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos?page=1&limit=100', { credentials: 'include' }),
       ]);
 
       if (!resSucursales.ok) throw new Error();
@@ -118,7 +118,7 @@ export default function SucursalesPage() {
     if (!deleteTarget) return;
     setDeleting(true);
     try {
-      const res = await fetch(`/api/productos/${deleteTarget}`, { method: 'DELETE', credentials: 'include' });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos/${deleteTarget}`, { method: 'DELETE', credentials: 'include' });
       if (!res.ok) {
         const d = await res.json();
         throw new Error(d.error || 'Error al eliminar');
@@ -137,7 +137,7 @@ export default function SucursalesPage() {
     if (!deleteSucursalTarget) return;
     setDeletingSucursal(true);
     try {
-      const res = await fetch(`/api/sucursales/${deleteSucursalTarget.id}`, { method: 'DELETE', credentials: 'include' });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/sucursales/${deleteSucursalTarget.id}`, { method: 'DELETE', credentials: 'include' });
       if (!res.ok) {
         const d = await res.json();
         throw new Error(d.error || 'Error al eliminar la sucursal');

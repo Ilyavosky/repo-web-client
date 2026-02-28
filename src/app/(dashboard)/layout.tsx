@@ -16,7 +16,7 @@ export default function DashboardLayout({
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    fetch('/api/auth/me', {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/me', {
       credentials: 'include',
     })
       .then((res) => {

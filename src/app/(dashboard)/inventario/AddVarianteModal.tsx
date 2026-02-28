@@ -85,7 +85,7 @@ export default function AddVarianteModal({
         stock_inicial: Number(formData.stock_inicial) || 0,
       };
 
-      const res = await fetch('/api/variantes', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/variantes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
