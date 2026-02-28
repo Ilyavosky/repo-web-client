@@ -1,0 +1,104 @@
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.cardTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.cardSubtitle {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin: -0.5rem 0 0.25rem 0;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+  max-height: 350px;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  padding: 0.65rem 0.75rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  gap: 0.75rem;
+  border: 1px solid #f3f4f6;
+  transition: background 0.15s;
+}
+
+.listItem:hover {
+  background-color: #f3f4f6;
+}
+
+.rankNumber {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #9ca3af;
+  min-width: 16px;
+  text-align: center;
+}
+
+.itemDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemName {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemMeta {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  margin-top: 0.15rem;
+}
+
+.itemStats {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.statPrimary {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #111827;
+}
+
+.statSecondary {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  margin-top: 0.15rem;
+}
+
+.textDanger {
+  color: #ef4444;
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
