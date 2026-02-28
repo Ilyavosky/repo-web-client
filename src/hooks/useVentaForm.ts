@@ -54,11 +54,11 @@ export function useVentaForm(
     if (!open) return;
     setLoadingSucursales(true);
     Promise.all([
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales', { credentials: 'include' })
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales`, { credentials: 'include' })
         .then(r => r.ok ? r.json() : { data: [] })
         .then(d => setSucursales(d.data || []))
         .catch(() => setSucursales([])),
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/motivos', { credentials: 'include' })
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/motivos`, { credentials: 'include' })
         .then(r => r.ok ? r.json() : { data: [] })
         .then(d => {
           const lista: MotivoTransaccion[] = d.data || [];
@@ -157,7 +157,7 @@ export function useVentaForm(
     if (!validate()) return;
     setSubmitting(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/ventas', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/ventas`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

@@ -36,7 +36,7 @@ export function useProductoEdit(
 
       let inventario = null;
       if (variante) {
-        const resSuc = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales', { credentials: 'include' });
+        const resSuc = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales`, { credentials: 'include' });
         if (resSuc.ok) {
           const { data: sucursales = [] } = await resSuc.json();
           for (const s of sucursales) {

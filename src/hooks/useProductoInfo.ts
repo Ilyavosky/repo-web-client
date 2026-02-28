@@ -20,7 +20,7 @@ export function useProductoInfo(open: boolean, productoId: number | null): UsePr
       const data: ProductoCompleto = await resProducto.json();
       setProducto(data);
 
-      const resSucursales = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales', { credentials: 'include' });
+      const resSucursales = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales`, { credentials: 'include' });
       if (!resSucursales.ok) return;
       const { data: sucursales = [] } = await resSucursales.json();
 

@@ -89,7 +89,7 @@ export default function InventarioPage() {
     try {
       const [resProductos, resSucursales] = await Promise.all([
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos?page=1&limit=100', { credentials: 'include' }),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales', { credentials: 'include' }),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales`, { credentials: 'include' }),
       ]);
       if (!resProductos.ok) throw new Error('Error al cargar productos');
       const data = await resProductos.json();

@@ -61,8 +61,8 @@ export default function SucursalesPage() {
     setError('');
     try {
       const [resSucursales, resProductos] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales', { credentials: 'include' }),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos?page=1&limit=100', { credentials: 'include' }),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales`, { credentials: 'include' }),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos?page=1&limit=100`, { credentials: 'include' }),
       ]);
 
       if (!resSucursales.ok) throw new Error();

@@ -54,8 +54,8 @@ export function useDashboardData(): UseDashboardDataResult {
     setTableLoading(true);
     try {
       const [resProductos, resSucursales] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos?page=1&limit=100', { credentials: 'include' }),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales', { credentials: 'include' }),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos?page=1&limit=100`, { credentials: 'include' }),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales`, { credentials: 'include' }),
       ]);
 
       const dataProductos = resProductos.ok ? await resProductos.json() : { productos: [] };
