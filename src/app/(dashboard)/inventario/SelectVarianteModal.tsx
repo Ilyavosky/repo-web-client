@@ -23,7 +23,7 @@ export default function SelectVarianteModal({ open, productoId, onClose, onSelec
       if (!open || !productoId) return;
       setLoading(true);
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos/${productoId}`, { credentials: 'include' });
+        const res = await fetch(`/api/v1/productos/${productoId}`, { credentials: 'include' });
         if (!res.ok) throw new Error('Error al cargar variante');
         const json: ProductoConVariantes = await res.json();
         if (active) setData(json);

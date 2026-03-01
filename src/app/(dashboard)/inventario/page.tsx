@@ -88,8 +88,8 @@ export default function InventarioPage() {
     setError('');
     try {
       const [resProductos, resSucursales] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos?page=1&limit=100`, { credentials: 'include' }),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales`, { credentials: 'include' }),
+        fetch(`/api/v1/productos?page=1&limit=100`, { credentials: 'include' }),
+        fetch(`/api/v1/inventario/sucursales`, { credentials: 'include' }),
       ]);
       if (!resProductos.ok) throw new Error('Error al cargar productos');
       const data = await resProductos.json();
@@ -100,7 +100,7 @@ export default function InventarioPage() {
 
       const inventarios = await Promise.all(
         listaSucursales.map(async (s) => {
-          const r = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario?sucursal_id=${s.id_sucursal}`, { credentials: 'include' });
+          const r = await fetch(`/api/v1/inventario?sucursal_id=${s.id_sucursal}`, { credentials: 'include' });
           if (!r.ok) return [];
           const d = await r.json();
           return d.data || [];
@@ -193,7 +193,7 @@ export default function InventarioPage() {
   const handleDelete = async () => {
     if (!deleteId) return;
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos/${deleteId}`, { method: 'DELETE', credentials: 'include' });
+      const res = await fetch(`/api/v1/productos/${deleteId}`, { method: 'DELETE', credentials: 'include' });
       if (!res.ok) {
         const d = await res.json().catch(() => ({}));
         throw new Error(d.error || 'Error al eliminar el producto');
@@ -238,7 +238,7 @@ export default function InventarioPage() {
     setSubmitting(true);
     try {
       const body = { nombre: formData.nombre.trim(), sku: formData.sku.trim() || undefined };
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos`, {
+      const res = await fetch(`/api/v1/productos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

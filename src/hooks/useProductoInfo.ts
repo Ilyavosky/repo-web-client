@@ -15,12 +15,12 @@ export function useProductoInfo(open: boolean, productoId: number | null): UsePr
   const fetchDatos = useCallback(async (id: number) => {
     setLoading(true);
     try {
-      const resProducto = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos/${id}`, { credentials: 'include' });
+      const resProducto = await fetch(`/api/v1/productos/${id}`, { credentials: 'include' });
       if (!resProducto.ok) return;
       const data: ProductoCompleto = await resProducto.json();
       setProducto(data);
 
-      const resSucursales = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales`, { credentials: 'include' });
+      const resSucursales = await fetch(`/api/v1/inventario/sucursales`, { credentials: 'include' });
       if (!resSucursales.ok) return;
       const { data: sucursales = [] } = await resSucursales.json();
 
@@ -30,7 +30,7 @@ export function useProductoInfo(open: boolean, productoId: number | null): UsePr
       const infoList: InventarioInfo[] = [];
 
       for (const s of sucursales) {
-        const r = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario?sucursal_id=${s.id_sucursal}`, { credentials: 'include' });
+        const r = await fetch(`/api/v1/inventario?sucursal_id=${s.id_sucursal}`, { credentials: 'include' });
         if (!r.ok) continue;
         const { data: items = [] } = await r.json();
 

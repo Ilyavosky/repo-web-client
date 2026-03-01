@@ -26,7 +26,7 @@ export function useDashboardData(): UseDashboardDataResult {
   const fetchStats = useCallback(async (periodo: string = '30dias') => {
     setStatsLoading(true);
     try {
-      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/dashboard/stats`;
+      let url = `/api/v1/dashboard/stats`;
       if (periodo !== 'historico') {
         const hoy = new Date();
         const inicio = new Date();
@@ -54,8 +54,8 @@ export function useDashboardData(): UseDashboardDataResult {
     setTableLoading(true);
     try {
       const [resProductos, resSucursales] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos?page=1&limit=100`, { credentials: 'include' }),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales`, { credentials: 'include' }),
+        fetch(`/api/v1/productos?page=1&limit=100`, { credentials: 'include' }),
+        fetch(`/api/v1/inventario/sucursales`, { credentials: 'include' }),
       ]);
 
       const dataProductos = resProductos.ok ? await resProductos.json() : { productos: [] };
@@ -79,7 +79,7 @@ export function useDashboardData(): UseDashboardDataResult {
 
       const inventariosPorSucursal = await Promise.all(
         listaSucursales.map(async (s) => {
-          const r = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario?sucursal_id=${s.id_sucursal}`, { credentials: 'include' });
+          const r = await fetch(`/api/v1/inventario?sucursal_id=${s.id_sucursal}`, { credentials: 'include' });
           const d = r.ok ? await r.json() : { data: [] };
           const rawItems: InventarioItem[] = d.data || [];
 

@@ -54,11 +54,11 @@ export function useVentaForm(
     if (!open) return;
     setLoadingSucursales(true);
     Promise.all([
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales`, { credentials: 'include' })
+      fetch(`/api/v1/inventario/sucursales`, { credentials: 'include' })
         .then(r => r.ok ? r.json() : { data: [] })
         .then(d => setSucursales(d.data || []))
         .catch(() => setSucursales([])),
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/motivos`, { credentials: 'include' })
+      fetch(`/api/v1/motivos`, { credentials: 'include' })
         .then(r => r.ok ? r.json() : { data: [] })
         .then(d => {
           const lista: MotivoTransaccion[] = d.data || [];
@@ -75,7 +75,7 @@ export function useVentaForm(
     if (!sucursalId) { setInventario([]); setFilteredInventario([]); return; }
     setLoadingInventario(true);
     try {
-      const r = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario?sucursal_id=${sucursalId}`, { credentials: 'include' });
+      const r = await fetch(`/api/v1/inventario?sucursal_id=${sucursalId}`, { credentials: 'include' });
       const d = r.ok ? await r.json() : { data: [] };
       const items: InventarioItem[] = (d.data || []).filter((item: InventarioItem) => item.stock_actual > 0);
       setInventario(items);
@@ -157,7 +157,7 @@ export function useVentaForm(
     if (!validate()) return;
     setSubmitting(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/ventas`, {
+      const res = await fetch(`/api/v1/ventas`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

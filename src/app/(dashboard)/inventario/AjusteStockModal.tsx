@@ -52,7 +52,7 @@ export default function AjusteStockModal({ open, varianteId, sucursalId, onClose
 
     setSubmitting(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/ajuste`, {
+      const res = await fetch(`/api/v1/inventario/ajuste`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

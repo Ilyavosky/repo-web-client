@@ -29,7 +29,7 @@ export default function VentasPage() {
   };
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/sucursales`, { credentials: 'include' })
+    fetch(`/api/v1/inventario/sucursales`, { credentials: 'include' })
       .then(r => r.ok ? r.json() : { data: [] })
       .then(d => setSucursales(d.data || []))
       .catch(() => setSucursales([]));
@@ -44,7 +44,7 @@ export default function VentasPage() {
       if (inicio) params.set('fecha_inicio', inicio);
       if (fin) params.set('fecha_fin', fin);
 
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/ventas/historial${params.toString() ? '?' + params.toString() : ''}`;
+      const url = `/api/v1/ventas/historial${params.toString() ? '?' + params.toString() : ''}`;
       const r = await fetch(url, { credentials: 'include' });
       if (!r.ok) throw new Error('Error al cargar historial');
       const d = await r.json();

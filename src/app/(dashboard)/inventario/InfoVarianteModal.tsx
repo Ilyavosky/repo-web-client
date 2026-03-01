@@ -21,14 +21,14 @@ export default function InfoVarianteModal({ open, varianteId, inventarioId, onCl
       if (!open || !varianteId) return;
       setLoading(true);
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/variantes/${varianteId}`, { credentials: 'include' });
+        const res = await fetch(`/api/v1/variantes/${varianteId}`, { credentials: 'include' });
         if (!res.ok) throw new Error('Error al cargar variante');
         const vData = await res.json();
         const v = vData.data || vData;
         
         let pName = 'Producto Maestro';
         if (v.id_producto_maestro) {
-           const pRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/productos/${v.id_producto_maestro}`, { credentials: 'include' });
+           const pRes = await fetch(`/api/v1/productos/${v.id_producto_maestro}`, { credentials: 'include' });
            if (pRes.ok) {
              const pJson = await pRes.json();
              pName = pJson.nombre || pName;
@@ -37,7 +37,7 @@ export default function InfoVarianteModal({ open, varianteId, inventarioId, onCl
 
         let invStock = 0;
         if (inventarioId) {
-           const resInv = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/inventario/${inventarioId}`, { credentials: 'include' });
+           const resInv = await fetch(`/api/v1/inventario/${inventarioId}`, { credentials: 'include' });
            if (resInv.ok) {
              const invJson = await resInv.json();
              invStock = (invJson.data?.stock_actual ?? invJson.stock_actual) || 0;
