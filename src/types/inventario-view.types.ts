@@ -17,8 +17,9 @@ export interface ProductoFila {
   id: number;
   sku: string;
   nombre: string;
-  proveedor: string | null;
+  proveedor: string;
   totalStock: number;
+  cantidadVariantes: number;
   valorOriginal: number;
   valorVenta: number;
   sucursal: string;
@@ -37,7 +38,6 @@ export interface ProductoCompleto {
   id_producto_maestro: number;
   sku: string;
   nombre: string;
-  proveedor: string | null;
   variantes: VarianteDetalle[];
 }
 
@@ -49,7 +49,6 @@ export interface InventarioInfo {
 export interface ProductoFormData {
   nombre: string;
   sku: string;
-  proveedor: string;
   modelo: string;
   color: string;
   codigo_barras: string;
