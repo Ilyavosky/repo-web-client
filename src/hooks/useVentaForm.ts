@@ -129,17 +129,20 @@ export function useVentaForm(
   };
 
   const validate = (): boolean => {
-    const errors: VentaFormErrors = {};
-    if (!formData.sucursal_id) errors.sucursal_id = 'Selecciona una sucursal';
-    if (!formData.id_variante) errors.id_variante = 'Selecciona un producto';
-    if (!formData.cantidad || Number(formData.cantidad) <= 0) errors.cantidad = 'Ingresa una cantidad válida';
-    if (!formData.precio_venta_final || Number(formData.precio_venta_final) < 0) errors.precio_venta_final = 'Ingresa un precio válido';
-    if (selectedProduct && Number(formData.cantidad) > selectedProduct.stock_actual) {
-      errors.cantidad = `Stock insuficiente. Disponible: ${selectedProduct.stock_actual}`;
-    }
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
+  const errors: VentaFormErrors = {};
+  if (!formData.sucursal_id) errors.sucursal_id = 'Selecciona una sucursal';
+  if (!formData.id_variante) errors.id_variante = 'Selecciona un producto';
+  if (!formData.cantidad || Number(formData.cantidad) <= 0) errors.cantidad = 'Ingresa una cantidad válida';
+  if (!formData.precio_venta_final || Number(formData.precio_venta_final) < 0) errors.precio_venta_final = 'Ingresa un precio válido';
+  if (selectedProduct && Number(formData.cantidad) > selectedProduct.stock_actual) {
+    errors.cantidad = `Stock insuficiente. Disponible: ${selectedProduct.stock_actual}`;
+  }
+  if (selectedProduct && Number(formData.precio_venta_final) < selectedProduct.precio_adquisicion) {
+    errors.precio_venta_final = `El precio no puede ser menor al costo de adquisición ($${selectedProduct.precio_adquisicion})`;
+  }
+  setFormErrors(errors);
+  return Object.keys(errors).length === 0;
+};
 
   const reset = () => {
     const primerMotivo = motivos.length > 0 ? String(motivos[0].id_motivo) : '';
