@@ -244,7 +244,7 @@ export default function InventarioPage() {
 
     setSubmitting(true);
     try {
-      const body = { nombre: formData.nombre.trim(), sku: formData.sku.trim() || undefined };
+      const body = { nombre: formData.nombre.trim(), sku: formData.sku.trim() || undefined, proveedor: formData.proveedor.trim() || null };
       const res = await fetch(`/api/v1/productos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
