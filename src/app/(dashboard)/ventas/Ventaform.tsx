@@ -23,6 +23,7 @@ export default function VentaForm({ open, onClose, onSuccess, showToast }: Venta
 
         <div className={styles.field}>
           <select
+            aria-label="Sucursal"
             className={`${styles.input} ${styles.select} ${formErrors.sucursal_id ? styles.inputError : ''}`}
             name="sucursal_id"
             value={formData.sucursal_id}
@@ -128,11 +129,16 @@ export default function VentaForm({ open, onClose, onSuccess, showToast }: Venta
         {selectedProduct && (
           <div className={styles.field}>
             <select
+              aria-label="Motivo de venta"
               className={`${styles.input} ${styles.select}`}
               name="id_motivo"
               value={formData.id_motivo}
               onChange={handleChange}
+              disabled={motivos.length === 0}
             >
+              <option value="" disabled>
+                {motivos.length === 0 ? 'Sin motivos disponibles' : 'Motivo de venta *'}
+              </option>
               {motivos.map(m => (
                 <option key={m.id_motivo} value={m.id_motivo}>{m.descripcion}</option>
               ))}

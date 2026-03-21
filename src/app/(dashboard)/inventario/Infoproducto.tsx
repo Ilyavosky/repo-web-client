@@ -15,9 +15,9 @@ interface InfoProductoModalProps {
 export default function InfoProductoModal({ open, productoId, onClose }: InfoProductoModalProps) {
   const { producto, inventarioInfo, loading } = useProductoInfo(open, productoId);
 
-  // Calculate total ranges or sums from all variants
   const totalValorOriginal = producto?.variantes.reduce((acc, v) => acc + Number(v.precio_adquisicion), 0) || 0;
   const totalValorVenta = producto?.variantes.reduce((acc, v) => acc + Number(v.precio_venta_etiqueta), 0) || 0;
+  const totalEnExistencia = inventarioInfo.reduce((acc, info) => acc + info.stock_actual, 0);
 
   return (
     <Dialog open={open} onClose={onClose} title="Información del producto">
@@ -44,14 +44,27 @@ export default function InfoProductoModal({ open, productoId, onClose }: InfoPro
           <div className={styles.row}>
             <div className={styles.field}>
               <p className={styles.label}>Valor original acumulado</p>
-              <p className={styles.value}>
-                ${totalValorOriginal.toLocaleString()}
-              </p>
+              <p className={styles.value}>${totalValorOriginal.toLocaleString()}</p>
             </div>
             <div className={styles.field}>
               <p className={styles.label}>Valor venta acumulado</p>
-              <p className={styles.value}>
-                ${totalValorVenta.toLocaleString()}
+              <p className={styles.value}>${totalValorVenta.toLocaleString()}</p>
+            </div>
+          </div>
+
+          <hr className={styles.divider} />
+
+          <div className={styles.row}>
+            <div className={styles.field}>
+              <p className={styles.label}>Total en existencia</p>
+              <p className={styles.value} style={{ fontWeight: 700, fontSize: '1.25rem' }}>
+                {totalEnExistencia} piezas
+              </p>
+            </div>
+            <div className={styles.field}>
+              <p className={styles.label}>Variantes registradas</p>
+              <p className={styles.value} style={{ fontWeight: 700, fontSize: '1.25rem' }}>
+                {producto.variantes.length}
               </p>
             </div>
           </div>

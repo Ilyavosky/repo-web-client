@@ -28,6 +28,7 @@ export interface InventarioItem {
   nombre_producto: string;
   stock_actual: number;
   precio_venta: number;
+  precio_adquisicion: number;
   modelo: string | null;
   color: string | null;
 }
