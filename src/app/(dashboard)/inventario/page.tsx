@@ -253,8 +253,18 @@ export default function InventarioPage() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Error al crear el producto");
-      showToast("Producto agregado correctamente", "success");
-      handleCloseModal();
+      
+      showToast("Producto base agregado. Ahora registra su variante.", "success");
+      
+      // Close parent modal
+      setShowModal(false);
+      setFormErrors({});
+
+      // Auto-open Variant Modal for the new product
+      setAddVarianteProductId(data.id_producto_maestro);
+      setAddVarianteProductoNombre(data.nombre);
+      setShowAddVarianteModal(true);
+
       fetchProductos();
     } catch (err) {
       showToast(err instanceof Error ? err.message : "Error al crear el producto", "error");
