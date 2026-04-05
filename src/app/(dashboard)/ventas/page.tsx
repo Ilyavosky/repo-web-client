@@ -71,6 +71,28 @@ export default function VentasPage() {
     fetchVentas('', '', '');
   };
 
+  const handleRevertVenta = async (id: number) => {
+    if (!window.confirm('¿Estás seguro de que deseas revertir esta venta? El stock volverá al inventario y el registro se eliminará permanentemente.')) {
+      return;
+    }
+
+    try {
+      const r = await fetch(`/api/v1/ventas/${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+
+      const data = await r.json();
+
+      if (!r.ok) throw new Error(data.error || 'Error al revertir la venta');
+
+      showToast('Venta revertida exitosamente. Stock actualizado.', 'success');
+      fetchVentas(filterSucursal, filterFechaInicio, filterFechaFin);
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : 'Error al revertir la venta', 'error');
+    }
+  };
+
   const exportCSV = () => {
     const headers = ['Fecha', 'Producto', 'Código', 'Sucursal', 'Cantidad', 'Precio venta', 'Utilidad Unitaria', 'Motivo', 'Usuario'];
     const rows = ventas.map(v => [
@@ -199,6 +221,7 @@ export default function VentasPage() {
                   <th className={styles.th}>Utilidad Unitaria</th>
                   <th className={styles.th}>Motivo</th>
                   <th className={styles.th}>Usuario</th>
+                  <th className={`${styles.th} ${styles.actionsTh}`}>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -228,6 +251,15 @@ export default function VentasPage() {
                       <span className={styles.motivoBadge}>{v.motivo}</span>
                     </td>
                     <td className={styles.td}>{v.nombre_usuario}</td>
+                    <td className={`${styles.td} ${styles.actionsTd}`}>
+                      <button 
+                        className={styles.revertBtn}
+                        onClick={() => handleRevertVenta(v.id_transaccion)}
+                        title="Revertir venta"
+                      >
+                        <span role="img" aria-label="revertir">🔄</span>
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
