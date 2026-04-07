@@ -9,6 +9,8 @@ import ErrorMessage from '@/components/forms/ErrorMessage';
 import TerminosModal from '@/components/ui/TerminosModal';
 import styles from './page.module.css';
 
+const PASSWORD_REGEX = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+
 export default function RegisterPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
@@ -31,7 +33,13 @@ export default function RegisterPage() {
     if (!formData.name.trim()) newErrors.name = 'El nombre es obligatorio';
     if (!formData.email) newErrors.email = 'El correo es obligatorio';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Formato de correo inválido';
-    if (!formData.password || formData.password.length < 8) newErrors.password = 'Mínimo 8 caracteres';
+    if (!formData.password) {
+      newErrors.password = 'La contraseña es obligatoria';
+    } else if (formData.password.length < 8) {
+      newErrors.password = 'Mínimo 8 caracteres';
+    } else if (!PASSWORD_REGEX.test(formData.password)) {
+      newErrors.password = 'Debe incluir al menos un carácter especial (!@#$%...)';
+    }
     if (!formData.confirmPassword) newErrors.confirmPassword = 'Confirma tu contraseña';
     else if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Las contraseñas no coinciden';
     setErrors(newErrors);
@@ -70,7 +78,6 @@ export default function RegisterPage() {
 
         <form onSubmit={handleSubmit}>
           <div className={styles.grid}>
-
             <FormField
               label="Nombre:"
               id="name"
@@ -80,7 +87,6 @@ export default function RegisterPage() {
               error={errors.name}
               icon={<User size={18} />}
             />
-
             <FormField
               label="Email:"
               id="email"
@@ -90,7 +96,6 @@ export default function RegisterPage() {
               error={errors.email}
               icon={<Mail size={18} />}
             />
-
             <FormField
               label="Contraseña:"
               id="password"
@@ -104,7 +109,6 @@ export default function RegisterPage() {
                 </button>
               }
             />
-
             <FormField
               label="Confirmar contraseña:"
               id="confirmPassword"
@@ -118,7 +122,6 @@ export default function RegisterPage() {
                 </button>
               }
             />
-
           </div>
 
           <button type="submit" disabled={isLoading} className={styles.submitButton}>
