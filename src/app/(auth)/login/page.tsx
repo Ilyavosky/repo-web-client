@@ -158,6 +158,9 @@ function LoginForm() {
                 <button type="submit" disabled={isLoading} className={styles.submitButton}>
                   {isLoading ? 'Verificando...' : 'Continuar'}
                 </button>
+                <Link href="/login/forgot-password" className={styles.new} style={{ textAlign: 'center', display: 'block', marginTop: '8px' }}>
+                  ¿Olvidaste tu contraseña?
+                </Link>
                 <Link href="/login/register" className={styles.new}>
                   ¿No tienes cuenta? <span className={styles.newregister}>Regístrate</span>
                 </Link>
