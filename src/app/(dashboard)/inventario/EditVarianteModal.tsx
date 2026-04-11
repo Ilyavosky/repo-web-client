@@ -14,13 +14,6 @@ const COLORES_PREDEFINIDOS = [
   'Con textura', 'Brillante', 'Mate', 'Metálico', 'Transparente', 'Bicolor',
 ];
 
-const MOTIVOS_AJUSTE = [
-  'Venta directa al cliente',
-  'Baja por merma / daño',
-  'Ajuste de inventario (Sobrante)',
-  'Ajuste de inventario (Faltante)',
-  'Ingreso por adquisición / compra',
-];
 
 interface ColorPickerProps {
   value: string;
@@ -169,8 +162,15 @@ export default function EditVarianteModal({ open, varianteId, onClose, onSuccess
   const [ajusteMotivo, setAjusteMotivo] = useState('');
   const [ajusteErrors, setAjusteErrors] = useState<Record<string, string>>({});
   const [submittingAjuste, setSubmittingAjuste] = useState(false);
+  const [motivosAjuste, setMotivosAjuste] = useState<{ id_motivo: number; descripcion: string }[]>([]);
 
   useEffect(() => {
+    if (open) {
+      fetch('/api/v1/motivos', { credentials: 'include' })
+        .then(r => r.ok ? r.json() : { data: [] })
+        .then(d => setMotivosAjuste(d.data || []))
+        .catch(() => setMotivosAjuste([]));
+    }
     let active = true;
     const fetchVariante = async () => {
       if (!open || !varianteId) return;
@@ -307,7 +307,7 @@ export default function EditVarianteModal({ open, varianteId, onClose, onSuccess
           id_variante: varianteId,
           id_sucursal: entry.id_sucursal,
           cantidad: Number(ajusteCantidad),
-          motivo: ajusteMotivo,
+          id_motivo: Number(ajusteMotivo),
         }),
       });
 
@@ -520,8 +520,8 @@ export default function EditVarianteModal({ open, varianteId, onClose, onSuccess
                   onChange={e => { setAjusteMotivo(e.target.value); setAjusteErrors(prev => ({ ...prev, ajusteMotivo: '' })); }}
                 >
                   <option value="">Selecciona un motivo</option>
-                  {MOTIVOS_AJUSTE.map(m => (
-                    <option key={m} value={m}>{m}</option>
+                  {motivosAjuste.map(m => (
+                    <option key={m.id_motivo} value={m.id_motivo}>{m.descripcion}</option>
                   ))}
                 </select>
                 {ajusteErrors.ajusteMotivo && <p className={formStyles.error}>{ajusteErrors.ajusteMotivo}</p>}
