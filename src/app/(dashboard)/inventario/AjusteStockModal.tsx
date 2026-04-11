@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Dialog from '@/components/ui/Dialog';
 import Button from '@/components/ui/Button';
 import formStyles from './form.module.css';
+
+interface Motivo { id_motivo: number; descripcion: string; }
 
 interface AjusteStockModalProps {
   open: boolean;
@@ -14,18 +16,21 @@ interface AjusteStockModalProps {
   showToast: (msg: string, type: 'success' | 'error') => void;
 }
 
-const MOTIVOS = [
-  'Venta directa al cliente',
-  'Baja por merma / daño',
-  'Ajuste de inventario (Sobrante)',
-  'Ajuste de inventario (Faltante)',
-  'Ingreso por adquisición / compra',
-];
-
 export default function AjusteStockModal({ open, varianteId, sucursalId, onClose, onSuccess, showToast }: AjusteStockModalProps) {
   const [submitting, setSubmitting] = useState(false);
-  const [formData, setFormData] = useState({ cantidad: '', motivo: '' });
+  const [formData, setFormData] = useState({ cantidad: '', id_motivo: '' });
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [motivos, setMotivos] = useState<Motivo[]>([]);
+
+  useEffect(() => {
+    if (!open) return;
+    fetch('/api/v1/motivos', { credentials: 'include' })
+      .then(r => r.ok ? r.json() : { data: [] })
+      .then(d => setMotivos(d.data || []))
+      .catch(() => setMotivos([]));
+    setFormData({ cantidad: '', id_motivo: '' });
+    setFormErrors({});
+  }, [open]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -37,8 +42,8 @@ export default function AjusteStockModal({ open, varianteId, sucursalId, onClose
     if (!varianteId || !sucursalId) return;
 
     const errors: Record<string, string> = {};
-    if (!formData.cantidad || Number(formData.cantidad) === 0) errors.cantidad = 'Debe ingresar una cantidad (Ej. +5 o -3)';
-    if (!formData.motivo) errors.motivo = 'Selecciona un motivo';
+    if (!formData.cantidad || Number(formData.cantidad) === 0) errors.cantidad = 'Ingresa una cantidad (ej. +5 o -3)';
+    if (!formData.id_motivo) errors.id_motivo = 'Selecciona un motivo';
     if (Object.keys(errors).length > 0) { setFormErrors(errors); return; }
 
     setSubmitting(true);
@@ -51,7 +56,7 @@ export default function AjusteStockModal({ open, varianteId, sucursalId, onClose
           id_variante: varianteId,
           id_sucursal: sucursalId,
           cantidad: Number(formData.cantidad),
-          motivo: formData.motivo,
+          id_motivo: Number(formData.id_motivo),
         }),
       });
 
@@ -88,7 +93,7 @@ export default function AjusteStockModal({ open, varianteId, sucursalId, onClose
             onChange={handleChange}
           />
           <p className={formStyles.hint}>
-            Usa números negativos para dar de baja inventario (ej. -2) y números positivos para asentar ingreso nuevo (ej. 10).
+            Negativos para dar de baja (-2), positivos para registrar ingreso (+10).
           </p>
           {formErrors.cantidad && <p className={formStyles.error}>{formErrors.cantidad}</p>}
         </div>
@@ -97,15 +102,17 @@ export default function AjusteStockModal({ open, varianteId, sucursalId, onClose
           <label className={formStyles.label}>Motivo de Ajuste</label>
           <select
             aria-label="Motivo de ajuste"
-            className={`${formStyles.input} ${formStyles.select} ${formErrors.motivo ? formStyles.inputError : ''}`}
-            name="motivo"
-            value={formData.motivo}
+            className={`${formStyles.input} ${formStyles.select} ${formErrors.id_motivo ? formStyles.inputError : ''}`}
+            name="id_motivo"
+            value={formData.id_motivo}
             onChange={handleChange}
           >
             <option value="">Selecciona el motivo del ajuste</option>
-            {MOTIVOS.map(m => (<option key={m} value={m}>{m}</option>))}
+            {motivos.map(m => (
+              <option key={m.id_motivo} value={m.id_motivo}>{m.descripcion}</option>
+            ))}
           </select>
-          {formErrors.motivo && <p className={formStyles.error}>{formErrors.motivo}</p>}
+          {formErrors.id_motivo && <p className={formStyles.error}>{formErrors.id_motivo}</p>}
         </div>
 
         <div className={formStyles.actions}>
