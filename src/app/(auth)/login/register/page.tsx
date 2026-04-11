@@ -55,7 +55,11 @@ export default function RegisterPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ nombre: formData.name, email: formData.email, password: formData.password, rol: 'GERENTE' }),
+        body: JSON.stringify({
+          nombre: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Error al crear la cuenta');
@@ -78,24 +82,8 @@ export default function RegisterPage() {
 
         <form onSubmit={handleSubmit}>
           <div className={styles.grid}>
-            <FormField
-              label="Nombre:"
-              id="name"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-              error={errors.name}
-              icon={<User size={18} />}
-            />
-            <FormField
-              label="Email:"
-              id="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              error={errors.email}
-              icon={<Mail size={18} />}
-            />
+            <FormField label="Nombre:" id="name" type="text" value={formData.name} onChange={handleChange} error={errors.name} icon={<User size={18} />} />
+            <FormField label="Email:" id="email" type="email" value={formData.email} onChange={handleChange} error={errors.email} icon={<Mail size={18} />} />
             <FormField
               label="Contraseña:"
               id="password"
@@ -103,11 +91,7 @@ export default function RegisterPage() {
               value={formData.password}
               onChange={handleChange}
               error={errors.password}
-              icon={
-                <button type="button" onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              }
+              icon={<button type="button" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}</button>}
             />
             <FormField
               label="Confirmar contraseña:"
@@ -116,11 +100,7 @@ export default function RegisterPage() {
               value={formData.confirmPassword}
               onChange={handleChange}
               error={errors.confirmPassword}
-              icon={
-                <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-                  {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              }
+              icon={<button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>{showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}</button>}
             />
           </div>
 

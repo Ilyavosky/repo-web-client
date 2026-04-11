@@ -27,8 +27,8 @@ export default function SelectVarianteModal({ open, productoId, onClose, onSelec
         if (!res.ok) throw new Error('Error al cargar variante');
         const json: ProductoConVariantes = await res.json();
         if (active) setData(json);
-      } catch (err) {
-        console.error(err);
+      } catch {
+        if (active) setData(null);
       } finally {
         if (active) setLoading(false);
       }
@@ -55,21 +55,9 @@ export default function SelectVarianteModal({ open, productoId, onClose, onSelec
               <div
                 key={v.id_variante}
                 className={styles.row}
-                style={{
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '8px',
-                  padding: '12px',
-                  cursor: 'pointer',
-                  transition: 'border-color 0.2s, background-color 0.2s'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#0ea5e9';
-                  e.currentTarget.style.backgroundColor = '#f0f9ff';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#e5e7eb';
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                }}
+                style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '12px', cursor: 'pointer', transition: 'border-color 0.2s, background-color 0.2s' }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#0ea5e9'; e.currentTarget.style.backgroundColor = '#f0f9ff'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e5e7eb'; e.currentTarget.style.backgroundColor = 'transparent'; }}
                 onClick={() => onSelect(v.id_variante)}
               >
                 <div style={{ flex: 1 }}>
