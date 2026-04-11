@@ -213,8 +213,7 @@ export default function EditVarianteModal({ open, varianteId, onClose, onSuccess
           setAjusteMotivo('');
           setAjusteErrors({});
         }
-      } catch (err) {
-        console.error(err);
+      } catch {
         if (active) showToast('Error al cargar variante', 'error');
       } finally {
         if (active) setLoading(false);
@@ -275,8 +274,7 @@ export default function EditVarianteModal({ open, varianteId, onClose, onSuccess
       showToast('Variante actualizada correctamente', 'success');
       onSuccess();
       onClose();
-    } catch (err) {
-      console.error(err);
+    } catch {
       showToast('Error de red al guardar', 'error');
     } finally {
       setSubmitting(false);
@@ -301,7 +299,7 @@ export default function EditVarianteModal({ open, varianteId, onClose, onSuccess
 
     setSubmittingAjuste(true);
     try {
-      const res = await fetch(`/api/v1/inventario/ajuste`, {
+      const res = await fetch('/api/v1/inventario/ajuste', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -332,8 +330,7 @@ export default function EditVarianteModal({ open, varianteId, onClose, onSuccess
       setAjusteErrors({});
       showToast('Stock ajustado correctamente', 'success');
       onSuccess();
-    } catch (err) {
-      console.error(err);
+    } catch {
       showToast('Error de red al ajustar stock', 'error');
     } finally {
       setSubmittingAjuste(false);
@@ -362,7 +359,7 @@ export default function EditVarianteModal({ open, varianteId, onClose, onSuccess
                   color: '#6b7280',
                   borderColor: '#e5e7eb',
                   cursor: 'not-allowed',
-                  fontWeight: '500'
+                  fontWeight: '500',
                 }}
               />
               <p className={formStyles.hint}>
